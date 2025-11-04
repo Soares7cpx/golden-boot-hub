@@ -14,7 +14,243 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          athlete_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          status: Database["public"]["Enums"]["application_status"]
+          tryout_id: string
+          updated_at: string
+        }
+        Insert: {
+          athlete_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          tryout_id: string
+          updated_at?: string
+        }
+        Update: {
+          athlete_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          tryout_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_athlete_id_fkey"
+            columns: ["athlete_id"]
+            isOneToOne: false
+            referencedRelation: "athlete_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_tryout_id_fkey"
+            columns: ["tryout_id"]
+            isOneToOne: false
+            referencedRelation: "tryouts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      athlete_profiles: {
+        Row: {
+          bio: string | null
+          created_at: string
+          current_club: string | null
+          date_of_birth: string | null
+          experience_years: number | null
+          height_cm: number | null
+          id: string
+          position: string | null
+          preferred_foot: string | null
+          profile_id: string
+          updated_at: string
+          weight_kg: number | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          current_club?: string | null
+          date_of_birth?: string | null
+          experience_years?: number | null
+          height_cm?: number | null
+          id?: string
+          position?: string | null
+          preferred_foot?: string | null
+          profile_id: string
+          updated_at?: string
+          weight_kg?: number | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          current_club?: string | null
+          date_of_birth?: string | null
+          experience_years?: number | null
+          height_cm?: number | null
+          id?: string
+          position?: string | null
+          preferred_foot?: string | null
+          profile_id?: string
+          updated_at?: string
+          weight_kg?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "athlete_profiles_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      club_profiles: {
+        Row: {
+          city: string
+          club_name: string
+          created_at: string
+          description: string | null
+          founded_year: number | null
+          id: string
+          logo_url: string | null
+          profile_id: string
+          state: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          city: string
+          club_name: string
+          created_at?: string
+          description?: string | null
+          founded_year?: number | null
+          id?: string
+          logo_url?: string | null
+          profile_id: string
+          state: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          city?: string
+          club_name?: string
+          created_at?: string
+          description?: string | null
+          founded_year?: number | null
+          id?: string
+          logo_url?: string | null
+          profile_id?: string
+          state?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "club_profiles_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string
+          user_type: Database["public"]["Enums"]["user_type"]
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+          phone?: string | null
+          updated_at?: string
+          user_type?: Database["public"]["Enums"]["user_type"]
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_type?: Database["public"]["Enums"]["user_type"]
+        }
+        Relationships: []
+      }
+      tryouts: {
+        Row: {
+          application_deadline: string
+          available_spots: number
+          category: string
+          club_id: string
+          created_at: string
+          description: string | null
+          id: string
+          location: string
+          status: string
+          title: string
+          total_spots: number
+          tryout_date: string
+          updated_at: string
+        }
+        Insert: {
+          application_deadline: string
+          available_spots: number
+          category: string
+          club_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          location: string
+          status?: string
+          title: string
+          total_spots: number
+          tryout_date: string
+          updated_at?: string
+        }
+        Update: {
+          application_deadline?: string
+          available_spots?: number
+          category?: string
+          club_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string
+          status?: string
+          title?: string
+          total_spots?: number
+          tryout_date?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tryouts_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "club_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +259,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      application_status: "pending" | "approved" | "rejected"
+      user_type: "athlete" | "club" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +387,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      application_status: ["pending", "approved", "rejected"],
+      user_type: ["athlete", "club", "admin"],
+    },
   },
 } as const
