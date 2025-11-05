@@ -41,16 +41,40 @@ const Auth = () => {
   }, []);
 
   const redirectToDashboard = async () => {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("user_type")
-      .eq("id", user?.id)
-      .single();
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) return;
 
-    if (profile?.user_type === "athlete") {
-      navigate("/dashboard/athlete");
-    } else if (profile?.user_type === "club") {
-      navigate("/dashboard/club");
+      // Get user role from user_roles table
+      const { data: roleData } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .single();
+
+      if (roleData?.role === "athlete") {
+        navigate("/dashboard/athlete");
+      } else if (roleData?.role === "club") {
+        navigate("/dashboard/club");
+      } else if (roleData?.role === "admin") {
+        navigate("/dashboard/admin");
+      } else {
+        // Fallback to old user_type if no role found
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("user_type")
+          .eq("id", user.id)
+          .single();
+
+        if (profile?.user_type === "athlete") {
+          navigate("/dashboard/athlete");
+        } else if (profile?.user_type === "club") {
+          navigate("/dashboard/club");
+        }
+      }
+    } catch (error) {
+      console.error("Error redirecting to dashboard:", error);
     }
   };
 
@@ -83,28 +107,52 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-          user_type: userType,
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            user_type: userType,
+          },
+          emailRedirectTo: `${window.location.origin}/`,
         },
-        emailRedirectTo: `${window.location.origin}/`,
-      },
-    });
-
-    if (error) {
-      toast({
-        title: "Erro no cadastro",
-        description: error.message,
-        variant: "destructive",
       });
-    } else {
+
+      if (error) {
+        toast({
+          title: "Erro no cadastro",
+          description: error.message,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // Create user role in user_roles table
+      if (data.user) {
+        const { error: roleError } = await supabase
+          .from("user_roles")
+          .insert({
+            user_id: data.user.id,
+            role: userType,
+          });
+
+        if (roleError) {
+          console.error("Error creating user role:", roleError);
+        }
+      }
+
       toast({
         title: "Cadastro realizado!",
         description: "Você já pode fazer login",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Erro no cadastro",
+        description: error.message || "Ocorreu um erro ao criar sua conta",
+        variant: "destructive",
       });
     }
 
