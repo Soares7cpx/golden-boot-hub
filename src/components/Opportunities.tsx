@@ -35,8 +35,8 @@ const Opportunities = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Peneiras <span className="text-primary">Disponíveis</span>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+            Peneiras <span className="text-secondary">Disponíveis</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Confira as oportunidades abertas e garanta sua vaga
@@ -48,10 +48,10 @@ const Opportunities = () => {
             <Card key={index} className="hover:shadow-elegant transition-smooth">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-2xl">{opportunity.club}</CardTitle>
+                  <CardTitle className="text-2xl font-heading">{opportunity.club}</CardTitle>
                   <Badge className="gradient-accent">{opportunity.status}</Badge>
                 </div>
-                <p className="text-lg font-semibold text-primary">{opportunity.category}</p>
+                <p className="text-lg font-semibold text-secondary">{opportunity.category}</p>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center text-muted-foreground">

@@ -23,7 +23,7 @@ const About = () => {
     <section className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Impulsionando o <span className="text-primary">Futebol de Base</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -37,10 +37,10 @@ const About = () => {
               key={index}
               className="bg-card p-8 rounded-xl shadow-elegant hover:shadow-strong transition-smooth hover:-translate-y-1"
             >
-              <div className="w-16 h-16 gradient-primary rounded-lg flex items-center justify-center mb-6">
+              <div className="w-16 h-16 gradient-secondary rounded-lg flex items-center justify-center mb-6">
                 <feature.icon className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+              <h3 className="text-2xl font-heading font-bold mb-3">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </div>
           ))}

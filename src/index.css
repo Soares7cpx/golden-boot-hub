@@ -8,47 +8,60 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Base colors */
     --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    --foreground: 210 100% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 210 100% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover-foreground: 210 100% 15%;
 
-    --primary: 142 71% 45%;
+    /* Brand colors - Azul marinho (confiança) */
+    --primary: 210 100% 25%;
+    --primary-light: 210 100% 35%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
+    /* Verde (energia do campo) */
+    --secondary: 142 71% 45%;
+    --secondary-light: 142 71% 55%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    /* Muted */
+    --muted: 210 30% 96%;
+    --muted-foreground: 210 20% 45%;
 
-    --accent: 48 96% 53%;
-    --accent-foreground: 0 0% 10%;
+    /* Dourado (destaque) */
+    --accent: 43 96% 56%;
+    --accent-light: 43 96% 66%;
+    --accent-foreground: 210 100% 15%;
 
+    /* Destructive */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 142 71% 45%;
+    /* Borders & inputs */
+    --border: 210 30% 90%;
+    --input: 210 30% 90%;
+    --ring: 210 100% 25%;
 
     --radius: 0.75rem;
     
-    --gradient-primary: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 35%));
-    --gradient-accent: linear-gradient(135deg, hsl(48 96% 53%), hsl(45 93% 47%));
-    --gradient-hero: linear-gradient(135deg, hsl(142 71% 45% / 0.95), hsl(0 0% 10% / 0.9));
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 25%), hsl(210 100% 35%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(43 96% 56%), hsl(43 96% 66%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 25% / 0.95), hsl(142 71% 45% / 0.85));
     
-    --shadow-elegant: 0 20px 50px -12px hsl(142 71% 45% / 0.15);
-    --shadow-strong: 0 25px 60px -15px hsl(0 0% 0% / 0.3);
+    /* Shadows */
+    --shadow-elegant: 0 20px 50px -12px hsl(210 100% 25% / 0.15);
+    --shadow-strong: 0 25px 60px -15px hsl(210 100% 25% / 0.3);
+    --shadow-glow: 0 0 40px hsl(43 96% 56% / 0.4);
     
+    /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -68,40 +81,54 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 0 0% 10%;
+    /* Base colors */
+    --background: 210 30% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 12%;
+    --card: 210 30% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 12%;
+    --popover: 210 30% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 71% 45%;
+    /* Brand colors - Azul marinho (confiança) */
+    --primary: 210 100% 45%;
+    --primary-light: 210 100% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 20%;
+    /* Verde (energia do campo) */
+    --secondary: 142 71% 45%;
+    --secondary-light: 142 71% 55%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 20%;
+    /* Muted */
+    --muted: 210 30% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 48 96% 53%;
-    --accent-foreground: 0 0% 10%;
+    /* Dourado (destaque) */
+    --accent: 43 96% 56%;
+    --accent-light: 43 96% 66%;
+    --accent-foreground: 210 100% 15%;
 
+    /* Destructive */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 142 71% 45%;
+    /* Borders & inputs */
+    --border: 210 30% 20%;
+    --input: 210 30% 20%;
+    --ring: 210 100% 45%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 35%));
-    --gradient-accent: linear-gradient(135deg, hsl(48 96% 53%), hsl(45 93% 47%));
-    --gradient-hero: linear-gradient(135deg, hsl(142 71% 45% / 0.95), hsl(0 0% 10% / 0.95));
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 45%), hsl(210 100% 55%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(43 96% 56%), hsl(43 96% 66%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 25% / 0.95), hsl(142 71% 45% / 0.85));
     
-    --shadow-elegant: 0 20px 50px -12px hsl(142 71% 45% / 0.25);
-    --shadow-strong: 0 25px 60px -15px hsl(0 0% 0% / 0.5);
+    /* Shadows */
+    --shadow-elegant: 0 20px 50px -12px hsl(210 100% 45% / 0.25);
+    --shadow-strong: 0 25px 60px -15px hsl(210 100% 45% / 0.4);
+    --shadow-glow: 0 0 40px hsl(43 96% 56% / 0.5);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -135,6 +162,10 @@ All colors MUST be HSL.
     background: var(--gradient-primary);
   }
   
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
   .gradient-accent {
     background: var(--gradient-accent);
   }
@@ -149,6 +180,10 @@ All colors MUST be HSL.
   
   .shadow-strong {
     box-shadow: var(--shadow-strong);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
   }
   
   .transition-smooth {

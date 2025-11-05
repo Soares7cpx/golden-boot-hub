@@ -17,7 +17,7 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto px-4 z-10 text-center text-white">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+        <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 animate-fade-in">
           Sua Chance de Brilhar<br />nos Gramados
         </h1>
         <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-white/90">

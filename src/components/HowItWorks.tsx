@@ -42,8 +42,8 @@ const HowItWorks = () => {
     <section className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Como <span className="text-primary">Funciona</span>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+            Como <span className="text-secondary">Funciona</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Simples, rápido e eficiente para atletas e clubes
@@ -52,15 +52,15 @@ const HowItWorks = () => {
 
         <div className="grid lg:grid-cols-2 gap-16 mb-16">
           <div>
-            <h3 className="text-3xl font-bold mb-8 text-primary">Para Atletas</h3>
+            <h3 className="text-3xl font-heading font-bold mb-8 text-secondary">Para Atletas</h3>
             <div className="space-y-8">
               {stepsAthletes.map((step, index) => (
                 <div key={index} className="flex gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 gradient-primary rounded-lg flex items-center justify-center">
+                  <div className="flex-shrink-0 w-16 h-16 gradient-secondary rounded-lg flex items-center justify-center">
                     <step.icon className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold mb-2">{step.title}</h4>
+                    <h4 className="text-xl font-heading font-bold mb-2">{step.title}</h4>
                     <p className="text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
@@ -69,15 +69,15 @@ const HowItWorks = () => {
           </div>
 
           <div>
-            <h3 className="text-3xl font-bold mb-8 text-primary">Para Clubes</h3>
+            <h3 className="text-3xl font-heading font-bold mb-8 text-primary">Para Clubes</h3>
             <div className="space-y-8">
               {stepsClubs.map((step, index) => (
                 <div key={index} className="flex gap-6">
                   <div className="flex-shrink-0 w-16 h-16 gradient-accent rounded-lg flex items-center justify-center">
-                    <step.icon className="h-8 w-8 text-secondary" />
+                    <step.icon className="h-8 w-8 text-accent-foreground" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold mb-2">{step.title}</h4>
+                    <h4 className="text-xl font-heading font-bold mb-2">{step.title}</h4>
                     <p className="text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ const HowItWorks = () => {
           />
           <div className="absolute inset-0 gradient-hero flex items-center justify-center">
             <div className="text-center text-white">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">
+              <h3 className="text-3xl md:text-4xl font-heading font-bold mb-4">
                 Pronto para começar sua jornada?
               </h3>
               <p className="text-xl mb-6">
