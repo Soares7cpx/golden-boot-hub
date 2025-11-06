@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import About from "./pages/About";
+import Blog from "./pages/Blog";
+import FeaturedAthletes from "./pages/FeaturedAthletes";
+import Contact from "./pages/Contact";
+import OpportunitiesPage from "./pages/OpportunitiesPage";
 import AthleteDashboard from "./pages/AthleteDashboard";
 import ClubDashboard from "./pages/ClubDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -22,6 +27,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/featured-athletes" element={<FeaturedAthletes />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/opportunities" element={<OpportunitiesPage />} />
           <Route 
             path="/dashboard/athlete" 
             element={

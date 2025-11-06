@@ -24,22 +24,24 @@ const Hero = () => {
           Conectamos talentos do futebol de base com as melhores oportunidades em clubes profissionais
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            size="lg" 
-            className="text-lg gradient-primary hover:opacity-90 transition-smooth shadow-strong"
-            onClick={() => window.location.href = "/auth"}
-          >
-            Ver Peneiras Disponíveis
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-          <Button 
-            size="lg" 
-            variant="secondary" 
-            className="text-lg"
-            onClick={() => window.location.href = "/auth"}
-          >
-            Cadastrar Clube
-          </Button>
+          <a href="/opportunities">
+            <Button 
+              size="lg" 
+              className="text-lg gradient-accent hover:opacity-90 transition-smooth shadow-strong"
+            >
+              Ver Peneiras Disponíveis
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </a>
+          <a href="/auth">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="text-lg bg-white/10 text-white border border-white/20 hover:bg-white/20"
+            >
+              Cadastrar Clube
+            </Button>
+          </a>
         </div>
       </div>
     </section>

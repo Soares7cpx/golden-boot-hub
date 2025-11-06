@@ -51,7 +51,7 @@ const Auth = () => {
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id)
-        .single();
+        .maybeSingle();
 
       if (roleData?.role === "athlete") {
         navigate("/dashboard/athlete");
@@ -65,7 +65,7 @@ const Auth = () => {
           .from("profiles")
           .select("user_type")
           .eq("id", user.id)
-          .single();
+          .maybeSingle();
 
         if (profile?.user_type === "athlete") {
           navigate("/dashboard/athlete");
@@ -176,7 +176,7 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-muted px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold">PeneirasFutebol</CardTitle>
+          <CardTitle className="text-3xl font-heading font-bold">PeneirasFutebol</CardTitle>
           <CardDescription>Acesse sua conta ou crie uma nova</CardDescription>
         </CardHeader>
         <CardContent>
