@@ -25,13 +25,11 @@ export const useUserRole = () => {
           .single();
 
         if (error) {
-          console.error('Error fetching user role:', error);
           setRole(null);
         } else {
           setRole(data?.role as AppRole);
         }
       } catch (error) {
-        console.error('Error in fetchUserRole:', error);
         setRole(null);
       } finally {
         setLoading(false);

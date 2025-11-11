@@ -8,6 +8,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const loginSchema = z.object({
+  email: z.string().email("Email inválido").min(1, "Email é obrigatório"),
+  password: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
+});
+
+const signupSchema = z.object({
+  fullName: z.string().trim().min(2, "Nome deve ter no mínimo 2 caracteres").max(100, "Nome muito longo"),
+  email: z.string().email("Email inválido").min(1, "Email é obrigatório"),
+  password: z.string().min(6, "Senha deve ter no mínimo 6 caracteres").max(72, "Senha muito longa"),
+  userType: z.enum(["athlete", "club"], { required_error: "Selecione um tipo de conta" }),
+});
 import { User } from "@supabase/supabase-js";
 
 const Auth = () => {
@@ -74,7 +87,7 @@ const Auth = () => {
         }
       }
     } catch (error) {
-      console.error("Error redirecting to dashboard:", error);
+      // Error redirecting - user will stay on auth page
     }
   };
 
@@ -82,25 +95,37 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const validatedData = loginSchema.parse({ email, password });
 
-    if (error) {
-      toast({
-        title: "Erro no login",
-        description: error.message,
-        variant: "destructive",
+      const { error } = await supabase.auth.signInWithPassword({
+        email: validatedData.email,
+        password: validatedData.password,
       });
-    } else {
+
+      if (error) throw error;
+
       toast({
         title: "Login realizado!",
         description: "Bem-vindo de volta",
       });
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Erro de validação",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Erro no login",
+          description: error.message || "Verifique suas credenciais",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -108,27 +133,26 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      const validatedData = signupSchema.parse({ 
+        fullName, 
+        email, 
+        password, 
+        userType 
+      });
+
       const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
+        email: validatedData.email,
+        password: validatedData.password,
         options: {
           data: {
-            full_name: fullName,
-            user_type: userType,
+            full_name: validatedData.fullName,
+            user_type: validatedData.userType,
           },
           emailRedirectTo: `${window.location.origin}/`,
         },
       });
 
-      if (error) {
-        toast({
-          title: "Erro no cadastro",
-          description: error.message,
-          variant: "destructive",
-        });
-        setLoading(false);
-        return;
-      }
+      if (error) throw error;
 
       // Create user role in user_roles table
       if (data.user) {
@@ -136,11 +160,15 @@ const Auth = () => {
           .from("user_roles")
           .insert({
             user_id: data.user.id,
-            role: userType,
+            role: validatedData.userType,
           });
 
         if (roleError) {
-          console.error("Error creating user role:", roleError);
+          toast({
+            title: "Atenção",
+            description: "Conta criada, mas houve um problema ao definir as permissões. Entre em contato com o suporte.",
+            variant: "destructive",
+          });
         }
       }
 
@@ -149,14 +177,22 @@ const Auth = () => {
         description: "Você já pode fazer login",
       });
     } catch (error: any) {
-      toast({
-        title: "Erro no cadastro",
-        description: error.message || "Ocorreu um erro ao criar sua conta",
-        variant: "destructive",
-      });
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Erro de validação",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Erro no cadastro",
+          description: error.message || "Ocorreu um erro ao criar sua conta",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   if (user) {

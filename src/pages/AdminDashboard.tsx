@@ -81,7 +81,6 @@ const AdminDashboard = () => {
       setClubs(clubsData || []);
 
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
       toast({
         title: "Erro ao carregar dados",
         description: "Não foi possível carregar os dados do painel.",
