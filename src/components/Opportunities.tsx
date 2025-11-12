@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Opportunities = () => {
   const opportunities = [
@@ -77,8 +78,10 @@ const Opportunities = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            Ver Todas as Peneiras
+          <Button asChild variant="outline" size="lg">
+            <Link to="/opportunities">
+              Ver Todas as Peneiras
+            </Link>
           </Button>
         </div>
       </div>

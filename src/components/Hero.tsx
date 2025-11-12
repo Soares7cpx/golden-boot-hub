@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-soccer.jpg";
 
 const Hero = () => {
@@ -24,24 +25,26 @@ const Hero = () => {
           Conectamos talentos do futebol de base com as melhores oportunidades em clubes profissionais
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/opportunities">
-            <Button 
-              size="lg" 
-              className="text-lg gradient-accent hover:opacity-90 transition-smooth shadow-strong"
-            >
+          <Button 
+            asChild
+            size="lg" 
+            className="text-lg gradient-accent hover:opacity-90 transition-smooth shadow-strong"
+          >
+            <Link to="/opportunities">
               Ver Peneiras Disponíveis
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </a>
-          <a href="/auth">
-            <Button 
-              size="lg" 
-              variant="secondary" 
-              className="text-lg bg-white/10 text-white border border-white/20 hover:bg-white/20"
-            >
+            </Link>
+          </Button>
+          <Button 
+            asChild
+            size="lg" 
+            variant="secondary" 
+            className="text-lg bg-white/10 text-white border border-white/20 hover:bg-white/20"
+          >
+            <Link to="/auth">
               Cadastrar Clube
-            </Button>
-          </a>
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
